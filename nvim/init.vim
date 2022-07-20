@@ -41,15 +41,20 @@ endif
 " =========================== Plugins Related ===========================
 " =======================================================================
 call plug#begin()
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Color-Scheme
 Plug 'gruvbox-community/gruvbox'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " COCCCCC
 Plug 'jiangmiao/auto-pairs' " For enabling automatic pair completion
-Plug 'vim-airline/vim-airline'
-
-" Plug 'tpope/vim-markdown'
-" Plug 'mbbill/undotree' " Undotree
+Plug 'vim-airline/vim-airline' " Because it is cool
+Plug 'tpope/vim-fugitive'
 
 
+" Diagrams
+Plug 'jbyuki/venn.nvim'
+
+" Fuzzy finder
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 
@@ -72,6 +77,14 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
 " =========================== Workflow related ===========================
+"
+" Plugin-Independent Quality of Life stuff
+nnoremap ß $
+vnoremap ß $
+nnoremap ? $a
+nnoremap m %
+vnoremap m %
+
 " Better mapleader key
 let mapleader = " "
 
@@ -88,18 +101,16 @@ nnoremap <Leader>- :vertical resize -5<CR>
 " These are pure joy, thanks ThePrimeagen
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+nnoremap J 1<C-d>
+nnoremap K 1<C-u>
 
 " Clipboard related
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
 
-" Quality of Life stuff
-nnoremap ß $
-vnoremap ß $
-nnoremap ? $a
-nnoremap m %
-vnoremap m %
+" Code Workflow
+nnoremap <leader><Cr> :!
 
 " COC Stuff
 " GoTo code navigation.
@@ -115,10 +126,8 @@ nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart
 " Quickfix
 nmap <leader>. <Plug>(coc-codeaction)
-" 
-" " Make stuff prettier (requires coc-prettier)
-" " command! -nargs=0 Prettier :CocCommand prettier.formatFile
-" nmap <leader>f :Prettier
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -128,14 +137,15 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" Diagram Stuff
+nmap <leader>d :set ve=all<CR>
+nmap <leader>D :set ve=<CR>
+vnoremap <leader>b :VBox<CR>
 
 " FZF Stuff
 nnoremap <C-p> :GFiles<CR>
