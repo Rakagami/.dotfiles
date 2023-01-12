@@ -1,4 +1,5 @@
 require("rakagami/set")
+require("rakagami/packer")
 require("rakagami/remap")
 
 vim.cmd("colorscheme gruvbox")
