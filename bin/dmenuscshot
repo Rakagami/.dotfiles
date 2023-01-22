@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# This is bound to Shift+PrintScreen by default, requires maim. It lets you
+# choose the kind of screenshot to take, including copying the image or even
+# highlighting an area to copy. scrotcucks on suicidewatch right now.
+
+case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)" | dmenu -l 6 -i -p "Screenshot which area?")" in
+	"a selected area") scshot -a && notify-send "Screenshot" "Screenshot of area taken";;
+	"current window") scshot -w && notify-send "Screenshot" "Screenshot of window taken";;
+	"full screen") scshot -f && notify-send "Screenshot" "Screenshot of screen taken";;
+	"a selected area (copy)") scshot -ac && notify-send "Screenshot" "Screenshot of area taken and saved to clipboard" ;;
+	"current window (copy)") scshot -wc && notify-send "Screenshot" "Screenshot of window taken and saved to clipboard" ;;
+	"full screen (copy)") scshot -fc && notify-send "Screenshot" "Screenshot of screen taken and saved to clipboard" ;;
+esac

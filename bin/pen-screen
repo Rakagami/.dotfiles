@@ -1,0 +1,6 @@
+#!/bin/bash
+
+xinput --map-to-output "Wacom Pen and multitouch sensor Finger" eDP-1 2> /dev/null
+xinput --map-to-output "Wacom Intuos S Pad" eDP-1 2> /dev/null
+xinput --map-to-output "Wacom Intuos S Pen Pen (0)" eDP-1 2> /dev/null
+xinput --map-to-output "Wacom Pen and multitouch sensor Pen Pen (0x9b8cd04e)" eDP-1 2> /dev/null

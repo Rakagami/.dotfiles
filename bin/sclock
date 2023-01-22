@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Screen locker script using i3lock and pywal
+
+TMPBG=/tmp/screen.png
+maim $TMPBG && convert $TMPBG -scale 10% -scale 1000% -draw "fill black fill-opacity 0.4 $rectangles" $TMPBG
+
+[ -f "$XDG_CACHE_HOME/wal/colors.sh" ] \
+        && source "$XDG_CACHE_HOME/wal/colors.sh" \
+        || (color9='00ff00ff'; foreground='ffffffff'; background='000000ff')
+
+# Suspend dunst and lock, then resume dunst when unlocked.
+pkill -u $USER -USR1 dunst
+
+# Flags adjusted for i3lock version 2.13.c.3
+# the "ringwrongcolor" is corresponds to the "barwrongcolor"
+i3lock -i $TMPBG \
+    --clock \
+    --indicator \
+    --bar-indicator \
+    --date-color=#ffffffff --time-color=#ffffffff --greeter-color=#ffffffff \
+    --verif-color=#ffffffff --wrong-color=#ffffffff \
+    --bshl-color=#ff0000ff --ringwrong-color=#ff0000ff \
+    --keyhl-color=$color9 --ringver-color=$foreground --bar-color=$background -c $background \
+    --noinput-text=""
+    #--no-verify
+
+pkill -u $USER -USR2 dunst
+
+rm $TMPBG

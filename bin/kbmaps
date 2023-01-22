@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# This script is called on startup to remap keys
+setxkbmap -layout de -option caps:escape # Map the caps lock key to escape and sets layout
+xset r rate 300 50 &    # Speed xrate up
+

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# This script is best called in the -o flag of wal
+
+[ -f "${XDG_CACHE_HOME:-$HOME/.cache}/wal/dunstrc" ] && ln -sf "${XDG_CACHE_HOME:-$HOME/.cache}/wal/dunstrc" "${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc"
+killall dunst

@@ -1,0 +1,46 @@
+#!/bin/sh
+# This is bound to Shift+PrintScreen by default, requires maim. It lets you
+# choose the kind of screenshot to take, including copying the image or even
+# highlighting an area to copy. scrotcucks on suicidewatch right now.
+
+# Screenshot Path
+[ -d "$HOME/Media/Pictures/screenshots" ] \
+        && CSHOT_PATH="$HOME/Media/Pictures/screenshots" \
+        || CSHOT_PATH="$HOME"
+
+FILENAME="$(date '+%y%m%d-%H%M-%S').png"
+MAIMDEST=$CSHOT_PATH/$FILENAME
+
+print_usage() {
+	echo "Usage: $0 [-h] [-awfc]"
+        echo "Screenshot utility using maim, xclip and xdotool."
+	echo "  options:"
+	echo "    -h           Print this help and exit"
+        echo "    -a           Screenshot selected area (default)"
+	echo "    -w           Screeenshot current window"
+	echo "    -f           Screenshot full screen"
+        echo "    -c           Save screenshot to clipboard (not default)"
+}
+
+while getopts 'hawfc' flag; do
+	case "${flag}" in
+		h)
+			print_usage
+			exit 0 ;;
+		a)
+			MAIMFLAG="-s" ;;
+		w)
+			MAIMFLAG="-i $(xdotool getactivewindow)" ;;
+		f)
+			MAIMFLAG="" ;;
+		c)
+			PIPEDEST="xclip -selection clipboard -t image/png" && \
+                        MAIMDEST="" ;;
+		*)
+			print_usage
+			exit 1 ;;
+	esac
+done
+
+echo "$MAIMFLAG $MAIMDEST"
+maim $MAIMFLAG $MAIMDEST | $PIPEDEST
