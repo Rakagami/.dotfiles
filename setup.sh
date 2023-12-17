@@ -3,7 +3,6 @@
 print_usage() {
     cat << EOF
 usage: setup.sh [-h]
-
 Setup of this repository's dotfiles. Just execute this bash script and the rest is hopefully intuitive enough.
 This script will install the dotfiles to the current user's config directories.
 EOF
@@ -74,8 +73,6 @@ setup_neovim() {
 setup_zsh() {
     ask_consent "zsh"
     [ "$?" != "0" ] && echo "Skipping zsh..." && return 1
-
-    echo "ZSH still TODO..." && return 0
 
     zsh --version || (echo "zsh not installed" && return 1)
 
