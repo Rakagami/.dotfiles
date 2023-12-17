@@ -50,7 +50,7 @@ setup_tmux() {
     # Checking for existing tmux config
     test -d $CONFIG_PATH/tmux && echo "Backing up old config" && mv $CONFIG_PATH/tmux $CONFIG_PATH/tmux.bak || (echo "Something went wrong" && return 1)
 
-    cp $SCRIPTDIR/tmux $CONFIG_PATH/tmux || (echo "Something went wrong on copying to $CONFIG_PATH/tmux" && return 1)
+    cp -r $SCRIPTDIR/tmux $CONFIG_PATH/tmux || (echo "Something went wrong on copying to $CONFIG_PATH/tmux" && return 1)
 
     echo "Finished setting up tmux"
 }
@@ -65,7 +65,7 @@ setup_neovim() {
     # Checking for existing tmux config
     test -d $CONFIG_PATH/nvim && echo "Backing up old config" && mv $CONFIG_PATH/nvim $CONFIG_PATH/nvim.bak || (echo "Something went wrong" && return 1)
 
-    cp $SCRIPTDIR/nvim $CONFIG_PATH/nvim || (echo "Something went wrong on copying to $CONFIG_PATH/nvim" && return 1)
+    cp -r $SCRIPTDIR/nvim $CONFIG_PATH/nvim || (echo "Something went wrong on copying to $CONFIG_PATH/nvim" && return 1)
 
     echo "Finished setting up neovim"
 }
@@ -80,6 +80,10 @@ setup_zsh() {
     zsh --version || (echo "zsh not installed" && return 1)
 
     echo "Setting up zsh..."
+
+    cp $SCRIPTDIR/zsh/.zshrc $HOME/.zshrc || (echo "Something went wrong on copying to $HOME/.zshrc" && return 1)
+
+    echo "Finished setting up zsh"
 }
 
 ## Main
