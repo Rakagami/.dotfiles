@@ -15,6 +15,10 @@ vim.keymap.set("v", "m", "%")
 vim.keymap.set("n", "ß", "$")
 vim.keymap.set("v", "ß", "$")
 
+-- hl search
+vim.keymap.set({"n", "v"}, "<leader>hh", "*N")
+vim.keymap.set("n", "<leader>hl", ":nohl<CR>")
+
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
@@ -26,7 +30,7 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+-- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format) using the formatter plugin for this
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
