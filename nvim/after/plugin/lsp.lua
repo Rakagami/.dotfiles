@@ -52,6 +52,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 require('mason').setup({})
+
 require('mason-lspconfig').setup({
   ensure_installed = {},
   handlers = {
